@@ -1,0 +1,130 @@
+<!doctype html>
+<html>
+    <head>
+        <script src="js/jquery.min.js"></script>
+        <script src="js/jquery-ui.min.js"></script>
+        <script src="../jspsych.js"></script>
+        <script src="../plugins/slider-button-response.js"></script>
+        <script src="../plugins/jspsych-instructions.js"></script>
+        <script src="../plugins/jspsych-text.js"></script>
+        <link rel="stylesheet" href="../css/jspsych.css">
+        <link rel="stylesheet" href="css/jquery-ui.css">
+           
+        
+    </head>
+    <body>
+        <div id="jspsych-target"></div>
+    </body>
+    
+    <script>
+
+        var intro1 = {
+            type: 'instructions',
+            pages: [
+                'Welcome to the experiment.',
+                'Please rate the quality of the following textures using the slider. Click next to begin.'
+            ],
+            show_clickable_nav: true
+        }
+
+        // var intro2 = {
+        //    type: 'instructions',
+        //   pages: [
+        //   'Please rate the COARSENESS or FINENESS of the following textures using the slider',      
+        //   ],
+        //   show_clickable_nav: true
+        // }
+
+        var thanks = {
+            type: 'instructions',
+            pages: [
+                'Thank you for your participation!'
+            ],
+            show_clickable_nav: true
+        }
+
+        // var images = [];// ["textures/1.bmp", "textures/2.bmp", "textures/3.bmp", "textures/4.bmp", "textures/5.bmp", "textures/6.bmp", "textures/7.bmp", "textures/8.bmp", "textures/9.bmp"];
+
+        // for (var i = 1; i <= 9; i++) {
+        //     //images.push("textures/2.bmp");
+        //   images.push("textures/"+i+".bmp");
+        // }
+
+        var slider_tests = {
+            type: 'slider-button-response',
+            timeline: [
+                {
+                    labels: ['Low Contrast', 'High Contrast'], 
+                    prompt: '<p class="center-content">Rate the apparent CONTRAST in this texture</p>',
+                    stimulus: 'textures/2.bmp'
+                },
+                {
+                    labels: ['Non-repetitive ', 'Repetitive'], 
+                    prompt: '<p class="center-content">How REPETITIVE is this texture?</p>',
+                    stimulus: 'textures/2.bmp'
+                },
+                {
+                    labels: ['Non-granular ', 'Granular'], 
+                    prompt: '<p class="center-content">How GRANULAR is this texture?</p>',
+                    stimulus: 'textures/2.bmp'
+                },
+                {
+                    labels: ['Non-random', 'Random'], 
+                    prompt: '<p class="center-content">How RANDOM is this texture?</p>',
+                    stimulus: 'textures/2.bmp'
+                },
+                {
+                    labels: ['Rough', 'Smooth'], 
+                    prompt: '<p class="center-content">How ROUGH or SMOOTH is this texture?</p>',
+                    stimulus: 'textures/2.bmp'
+                },
+                {
+                    labels: ['Low feature density', 'High feature density'], 
+                    prompt: '<p class="center-content">Rate the apparent FEATURE DENSITY in this texture.</p>',
+                    stimulus: 'textures/2.bmp'
+                },
+                {
+                    labels: ['Non-directional', 'Directional'], 
+                    prompt: '<p class="center-content">How DIRECTIONAL is this texture.</p>',
+                    stimulus: 'textures/2.bmp'
+                },
+                {
+                    labels: ['Low structural complexity', 'High structural complexity'], 
+                    prompt: '<p class="center-content">How STRUCTURALLY COMPLEX is this texture?</p>',
+                    stimulus: 'textures/2.bmp'
+                },
+                {
+                    labels: ['Coarse', 'Fine'], 
+                    prompt: '<p class="center-content">How COARSE or FINE is this texture?</p>',
+                    stimulus: 'textures/2.bmp'
+                },
+                {
+                    labels: ['Irregular', 'Regular'], 
+                    prompt: '<p class="center-content">How REGULAR is this texture?</p>',
+                    stimulus: 'textures/2.bmp'
+                },
+                {
+                    labels: ['Non-oriented', 'Locally-oriented'], 
+                    prompt: '<p class="center-content">How LOCALLY-ORIENTED is this texture?</p>',
+                    stimulus: 'textures/1.bmp'
+                },
+                {
+                    labels: ['Non-uniform', 'Uniform'], 
+                    prompt: '<p class="center-content">How UNIFORM is this texture?</p>',
+                    stimulus: 'textures/3.bmp'
+                }
+            ], //end timeline 
+            randomize_order: false
+        }
+
+        jsPsych.init({
+            display_element: $('#jspsych-target'),
+            timeline: [intro1, slider_tests, thanks],
+            on_finish: function () {
+                jsPsych.data.displayData();
+            } //TO DO: remove before publishing
+        });
+
+    </script>
+    
+</html>
