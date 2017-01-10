@@ -29,42 +29,41 @@
             firebase.initializeApp(config);
 
 
-            var database = firebase.database();
-            var fruits = database.ref('fruits');
+            database = firebase.database();
+            tests = database.ref('texturetests');
             var timeN = new Date().valueOf(); //timestamp in seconds
 
 
             var data = {
-                name: 'pear',
-                count: 7,
+                name: 'pageLoad',
                 time: timeN
             };
             //fruits.push(data);
             //database.ref('fruits').push(data);
-            fruits.push(data, finished); //callback
+            tests.push(data, pushFinished); //callback
 
-            function finished(error) {
+            function pushFinished(error) {
                 if (error) {
-                    console.log('ooops');
+                    console.log('Error on push to DB');
                 } else {
-                    console.log('data saved!');
+                    console.log('Test data saved to DB');
                 }
             }
 
-            var ref = database.ref("fruits");
+            var ref = database.ref("texturetests");
             ref.on("value", gotData, errData); //value triggered on changes to db
 
             function gotData(data) {
                 var fruits = data.val();
                 // Grab the keys to iterate over the object
-                var keys = Object.keys(fruits);
+                var keys = Object.keys(tests);
 
                 for (var i = 0; i < keys.length; i++) {
                     var key = keys[i];
                     // Look at each fruit object!
-                    var fruit = fruits[key];
+                    var test = tests[key];
                 }
-                console.log("DB change callback: " + fruits);
+                console.log("DB change callback- returned object: " + tests);
             }
 
             //callback for specific id...
@@ -92,7 +91,7 @@
                 'Please rate the quality of the following textures using the slider. Click next to begin.'
             ],
             show_clickable_nav: true
-        }
+        };
 
         // var intro2 = {
         //    type: 'instructions',
@@ -108,7 +107,7 @@
                 'Thank you for your participation!'
             ],
             show_clickable_nav: true
-        }
+        };
 
         // var images = [];// ["textures/1.bmp", "textures/2.bmp", "textures/3.bmp", "textures/4.bmp", "textures/5.bmp", "textures/6.bmp", "textures/7.bmp", "textures/8.bmp", "textures/9.bmp"];
 
@@ -182,14 +181,18 @@
                 }
             ], //end timeline 
             randomize_order: false
-        }
+        };
 
         jsPsych.init({
             display_element: $('#jspsych-target'),
             timeline: [intro1, slider_tests, thanks],
             on_finish: function () {
-                jsPsych.data.displayData();
-            } //TO DO: remove before publishing
+                jsPsych.data.displayData(); //TO DO: remove before publishing
+                var csvString = jsPsych.data.dataAsCSV();
+                var dataArray = jsPsych.data.getData();
+                tests.push(dataArray, pushFinished); //callback
+                
+            } 
         });
 
     </script>
