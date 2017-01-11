@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Test Firebase</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!--favicon fix-->
+        <link rel="icon" href="data:;base64,iVBORw0KGgo="> 
+    </head>
+    <body>
+        <h1>Open Console to see debug msgs</h1>
+
+        <script src="https://www.gstatic.com/firebasejs/3.6.4/firebase.js"></script>
+        <script>
+            // Initialize Firebase
+            var config = {
+                apiKey: "AIzaSyA6aO0Rb19oJ_rojZ4tL0LagYArXpnn9Qc",
+                authDomain: "fir-test-15633.firebaseapp.com",
+                databaseURL: "https://fir-test-15633.firebaseio.com",
+                storageBucket: "fir-test-15633.appspot.com",
+                messagingSenderId: "572281505960"
+            };
+            firebase.initializeApp(config);
+
+
+            var database = firebase.database();
+            var fruits = database.ref('fruits');
+            var timeN = new Date().valueOf(); //timestamp in seconds
+       
+
+            var data = {
+                name: 'pear',
+                count: 7,
+                time: timeN
+            };
+            //fruits.push(data);
+            //database.ref('fruits').push(data);
+            fruits.push(data, finished); //callback
+
+            function finished(error) {
+                if (error) {
+                    console.log('ooops');
+                } else {
+                    console.log('data saved!');
+                }
+            }
+
+            var ref = database.ref("fruits");
+            ref.on("value", gotData, errData); //value triggered on changes to db
+
+            function gotData(data) {
+                var fruits = data.val();
+                // Grab the keys to iterate over the object
+                var keys = Object.keys(fruits);
+
+                for (var i = 0; i < keys.length; i++) {
+                    var key = keys[i];
+                    // Look at each fruit object!
+                    var fruit = fruits[key];
+                }
+                console.log("DB change callback: " + fruits);
+            }
+
+            //callback for specific id...
+//            var id = '-KVKnwa-MsPXzNbNHdmK';
+//            var ref = database.ref("fruits/" + id);
+//            ref.on("value", gotOne, errData);
+//
+//            function gotOne(data) {
+//                var fruit = data.val();
+//            }
+            function errData() {
+                console.log('Error on database update callback');
+            }
+        </script>
+
+    </body>
+</html>
