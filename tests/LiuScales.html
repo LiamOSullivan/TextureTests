@@ -1,260 +1,229 @@
 <!DOCTYPE html>
 <html>
     <head>
-            <meta charset="UTF-8">
+        <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<!--        <script src="js/jquery.min.js"></script>
-        <script src="js/jquery-ui.min.js"></script>-->
-        <script src="../../libraries/p5.js" type="text/javascript"></script>
-        <script src="../../libraries/p5.dom.js" type="text/javascript"></script>
-        <script src="imageLoader.js" type="text/javascript"></script>
-     
+        <script src="js/jquery.min.js"></script>
+        <script src="js/jquery-ui.min.js"></script>
+        <script src="../libraries/p5.js" type="text/javascript"></script>
+        <script src="../libraries/p5.dom.js" type="text/javascript"></script>
+        
         <style> body {padding: 0; margin: 0;} canvas {vertical-align: top;} </style>
-        <title>Image Loader</title>
-<!--        <script src="../jspsych.js"></script>
+        <title></title>
+        <script src="../jspsych.js"></script>
         <script src="../plugins/slider-button-response.js"></script>
         <script src="../plugins/jspsych-instructions.js"></script>
         <script src="../plugins/jspsych-text.js"></script>
         <link rel="stylesheet" href="../css/jspsych.css">
         <link rel="stylesheet" href="css/jquery-ui.css">
-        <link rel="icon" href="data:;base64,iVBORw0KGgo="> -->
-
-        
-
+        <link rel="icon" href="data:;base64,iVBORw0KGgo="> 
     </head>
     <body>
-        <!--<div id="jspsych-target"></div>-->
-        <!--<p id="demo">File info here</p>-->
-        <!--<script src="https://www.gstatic.com/firebasejs/3.6.4/firebase.js"></script>-->
-        <!--<script>-->
-<!--//            var debug = true;
-//            var fileNames = [];
-//            //var imageArray = [];
-//            var testImage;
-//            function preload() {
-//                console.log("Preload");
-//                var xhttp;
-//                if (window.XMLHttpRequest) {
-//                    // code for modern browsers
-//                    xhttp = new XMLHttpRequest();
-//                } else {
-//                    // code for IE6, IE5
-//                    xhttp = new ActiveXObject("Microsoft.XMLHTTP");
-//                }
-//                xhttp.onreadystatechange = function () {
-//                    if (this.readyState == 4 && this.status == 200) {
-//                        //document.getElementById("demo").innerHTML = this.responseText; //Remove after debug
-//                        fileNames = this.responseText.split("\n");
-//                        console.log("Server has specified " + fileNames.length + " texture files");
-//                        //loading images into the array        
-//                        //initImageArray();
-//                    }
-//                };
-//                xhttp.open("GET", "textures/ansinoise/contents.txt", true);
-//                xhttp.send();
-//
-//
-//            }
-//
-//            function initImageArray() {
-//                //Use a better way to load the number of images I need,
-//                //rather than filling a large array every time the page is loaded?
-////                for (var i = 0; i < fileNames.length; i++) {
-////                    var iPath = fileNames[i];
-////                    imageArray.push(iPath);
-////                }
-//                //console.log("imageArray has " + imageArray.length + " elements");
-//
-//                //TODO ensure different pics chosen for each trial
-//                var randomNum1 = Math.floor(Math.random() * fileNames.length);
-//                console.log("load texture image " + randomNum1);
-//                //testImage = "textures/ansinoise/"+fileNames[randomNum1]; 
-//        testImage = "textures/ansinoise/ansinoise_x128_y128_sm0.0_smI0_r10.png";        
-//        console.log("image path: " + testImage);
-////                if (debug) {
-////                    testImage1.title = "Texture #" + randomNum1; //gives image index as rollover
-////                } //for debug
-//
-//            }
-//                   
-//
-//            var intro1 = {
-//                type: 'instructions',
-//                pages: [
-//                    'Welcome to the experiment.',
-//                    'Please rate the quality of the following textures using the slider. Click next to begin.'
-//                ],
-//                show_clickable_nav: true
-//            };
-//
-//            // var intro2 = {
-//            //    type: 'instructions',
-//            //   pages: [
-//            //   'Please rate the COARSENESS or FINENESS of the following textures using the slider',      
-//            //   ],
-//            //   show_clickable_nav: true
-//            // }
-//
-//            var thanks = {
-//                type: 'instructions',
-//                pages: [
-//                    'Thank you for your participation!'
-//                ],
-//                show_clickable_nav: true
-//            };
-//
-//            // var images = [];// ["textures/1.bmp", "textures/2.bmp", "textures/3.bmp", "textures/4.bmp", "textures/5.bmp", "textures/6.bmp", "textures/7.bmp", "textures/8.bmp", "textures/9.bmp"];
-//
-//            // for (var i = 1; i <= 9; i++) {
-//            //     //images.push("textures/2.bmp");
-//            //   images.push("textures/"+i+".bmp");
-//            // }
-//
-//            var slider_tests = {
-//                type: 'slider-button-response',
-//                timeline: [
-//                    {
-//                        labels: ['Low Contrast', 'High Contrast'],
-//                        prompt: '<p class="center-content">Rate the apparent CONTRAST in this texture</p>',
-//                        stimulus: "textures/ansinoise/ansinoise_x128_y128_sm0.0_smI0_r10.png"
-//                    },
-//                    {
-//                        labels: ['Non-repetitive ', 'Repetitive'],
-//                        prompt: '<p class="center-content">How REPETITIVE is this texture?</p>',
-//                        stimulus: testImage
-//                    },
-//                    {
-//                        labels: ['Non-granular ', 'Granular'],
-//                        prompt: '<p class="center-content">How GRANULAR is this texture?</p>',
-//                        stimulus: testImage
-//                    },
-//                    {
-//                        labels: ['Non-random', 'Random'],
-//                        prompt: '<p class="center-content">How RANDOM is this texture?</p>',
-//                        stimulus: testImage
-//                    },
-//                    {
-//                        labels: ['Rough', 'Smooth'],
-//                        prompt: '<p class="center-content">How ROUGH or SMOOTH is this texture?</p>',
-//                        stimulus: testImage
-//                    },
-//                    {
-//                        labels: ['Low feature density', 'High feature density'],
-//                        prompt: '<p class="center-content">Rate the apparent FEATURE DENSITY in this texture.</p>',
-//                        stimulus: testImage
-//                    },
-//                    {
-//                        labels: ['Non-directional', 'Directional'],
-//                        prompt: '<p class="center-content">How DIRECTIONAL is this texture.</p>',
-//                        stimulus: testImage
-//                    },
-//                    {
-//                        labels: ['Low structural complexity', 'High structural complexity'],
-//                        prompt: '<p class="center-content">How STRUCTURALLY COMPLEX is this texture?</p>',
-//                        stimulus: testImage
-//                    },
-//                    {
-//                        labels: ['Coarse', 'Fine'],
-//                        prompt: '<p class="center-content">How COARSE or FINE is this texture?</p>',
-//                        stimulus: testImage
-//                    },
-//                    {
-//                        labels: ['Irregular', 'Regular'],
-//                        prompt: '<p class="center-content">How REGULAR is this texture?</p>',
-//                        stimulus: testImage
-//                    },
-//                    {
-//                        labels: ['Non-oriented', 'Locally-oriented'],
-//                        prompt: '<p class="center-content">How LOCALLY-ORIENTED is this texture?</p>',
-//                        stimulus: testImage
-//                    },
-//                    {
-//                        labels: ['Non-uniform', 'Uniform'],
-//                        prompt: '<p class="center-content">How UNIFORM is this texture?</p>',
-//                        stimulus: testImage
-//                    }
-//                ], //end timeline 
-//                randomize_order: false
-//            };
-//
-//            jsPsych.init({
-//                display_element: $('#jspsych-target'),
-//                timeline: [intro1, slider_tests, thanks],
-//                on_finish: function () {
-//                    jsPsych.data.displayData(); //TO DO: remove before publishing
-//                    //var csvString = jsPsych.data.dataAsCSV();
-//                    var dataArray = jsPsych.data.getData();
-//                    tests.push(dataArray, pushFinished); //callback
-//
-//                }
-//            });
-
-
-        </script>-->
-
-<!--        <script>
-            // Initialize Firebase
-            var config = {
-                apiKey: "AIzaSyA6aO0Rb19oJ_rojZ4tL0LagYArXpnn9Qc",
-                authDomain: "fir-test-15633.firebaseapp.com",
-                databaseURL: "https://fir-test-15633.firebaseio.com",
-                storageBucket: "fir-test-15633.appspot.com",
-                messagingSenderId: "572281505960"
-            };
-            firebase.initializeApp(config);
-
-
-            database = firebase.database();
-            tests = database.ref('texturetests');
-            var timeN = new Date().valueOf(); //timestamp in seconds
-
-
-            var data = {
-                name: 'pageLoad',
-                time: timeN
-            };
-            //fruits.push(data);
-            //database.ref('fruits').push(data);
-            tests.push(data, pushFinished); //callback
-
-            function pushFinished(error) {
-                if (error) {
-                    console.log('Error on push to DB');
-                } else {
-                    console.log('Test data saved to DB');
-                }
-            }
-
-            var ref = database.ref("texturetests");
-            ref.on("value", gotData, errData); //value triggered on changes to db
-
-            function gotData(data) {
-                var fruits = data.val();
-                // Grab the keys to iterate over the object
-                var keys = Object.keys(tests);
-
-                for (var i = 0; i < keys.length; i++) {
-                    var key = keys[i];
-                    // Look at each fruit object!
-                    var test = tests[key];
-                }
-                console.log("DB change callback- returned object: " + tests);
-            }
-
-            //callback for specific id...
-            //            var id = '-KVKnwa-MsPXzNbNHdmK';
-            //            var ref = database.ref("fruits/" + id);
-            //            ref.on("value", gotOne, errData);
-            //
-            //            function gotOne(data) {
-            //                var fruit = data.val();
-            //            }
-            function errData() {
-                console.log('Error on database update callback');
-            }
-
-
-        </script>-->
+        <div id="jspsych-target"></div>
     </body>
+
+    <script src="https://www.gstatic.com/firebasejs/3.6.4/firebase.js"></script>
+    <script>
+
+        var fileNames = [];
+        function preload() {
+            var debug = true;
+            console.log("Preload");
+            var xhttp;
+            if (window.XMLHttpRequest) {
+                // code for modern browsers
+                xhttp = new XMLHttpRequest();
+            } else {
+                // code for IE6, IE5
+                xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    fileNames = this.responseText.split("\n");
+                    console.log("Server has specified " + fileNames.length + " texture files");
+                    
+
+                }
+            };
+            xhttp.open("GET", "textures/ansinoise/contents.txt", true);
+            xhttp.send();
+        }
+
+        function setup() {
+            //this has to stay of p5.js doesn't load preload()
+        }
+
+        var testImage = function () {
+            var randomNum1 = Math.floor(Math.random() * fileNames.length);
+            console.log("load texture image " + randomNum1);
+            var img = "textures/ansinoise/" + fileNames[randomNum1];
+            return img;
+        }
+
+        var intro1 = {
+            type: 'instructions',
+            pages: [
+                'Welcome to the experiment.',
+                'Please rate the quality of the following textures using the slider. Click next to begin.'
+            ],
+            show_clickable_nav: true
+        };
+
+        var thanks = {
+            type: 'instructions',
+            pages: [
+                'Thank you for your participation!'
+            ],
+            show_clickable_nav: true
+        };
+
+        var slider_tests = {
+            type: 'slider-button-response',
+            timeline: [
+                {
+                    labels: ['Low Contrast', 'High Contrast'],
+                    prompt: '<p class="center-content">Rate the apparent CONTRAST in this texture</p>',
+                    stimulus: testImage
+
+
+                },
+                {
+                    labels: ['Non-repetitive ', 'Repetitive'],
+                    prompt: '<p class="center-content">How REPETITIVE is this texture?</p>',
+                    stimulus: testImage
+                },
+                {
+                    labels: ['Non-granular ', 'Granular'],
+                    prompt: '<p class="center-content">How GRANULAR is this texture?</p>',
+                    stimulus: testImage
+                },
+                {
+                    labels: ['Non-random', 'Random'],
+                    prompt: '<p class="center-content">How RANDOM is this texture?</p>',
+                    stimulus: testImage
+                },
+                {
+                    labels: ['Rough', 'Smooth'],
+                    prompt: '<p class="center-content">How ROUGH or SMOOTH is this texture?</p>',
+                    stimulus: testImage
+                },
+                {
+                    labels: ['Low feature density', 'High feature density'],
+                    prompt: '<p class="center-content">Rate the apparent FEATURE DENSITY in this texture.</p>',
+                    stimulus: testImage
+                },
+                {
+                    labels: ['Non-directional', 'Directional'],
+                    prompt: '<p class="center-content">How DIRECTIONAL is this texture.</p>',
+                    stimulus: testImage
+                },
+                {
+                    labels: ['Low structural complexity', 'High structural complexity'],
+                    prompt: '<p class="center-content">How STRUCTURALLY COMPLEX is this texture?</p>',
+                    stimulus: testImage
+                },
+                {
+                    labels: ['Coarse', 'Fine'],
+                    prompt: '<p class="center-content">How COARSE or FINE is this texture?</p>',
+                    stimulus: testImage
+                },
+                {
+                    labels: ['Irregular', 'Regular'],
+                    prompt: '<p class="center-content">How REGULAR is this texture?</p>',
+                    stimulus: testImage
+                },
+                {
+                    labels: ['Non-oriented', 'Locally-oriented'],
+                    prompt: '<p class="center-content">How LOCALLY-ORIENTED is this texture?</p>',
+                    stimulus: testImage
+                },
+                {
+                    labels: ['Non-uniform', 'Uniform'],
+                    prompt: '<p class="center-content">How UNIFORM is this texture?</p>',
+                    stimulus: testImage
+                }
+            ], //end timeline 
+            randomize_order: false
+        };
+
+        jsPsych.init({
+            display_element: $('#jspsych-target'),
+            timeline: [intro1, slider_tests, thanks],
+            on_finish: function () {
+                console.log("Finish testImage: " + testImage)
+                jsPsych.data.displayData(); //TO DO: remove before publishing
+                //var csvString = jsPsych.data.dataAsCSV();
+                var dataArray = jsPsych.data.getData();
+                tests.push(dataArray, pushFinished); //callback
+
+            }
+        });
+
+    </script>
+
+    <!--        <script>
+                // Initialize Firebase
+                var config = {
+                    apiKey: "AIzaSyA6aO0Rb19oJ_rojZ4tL0LagYArXpnn9Qc",
+                    authDomain: "fir-test-15633.firebaseapp.com",
+                    databaseURL: "https://fir-test-15633.firebaseio.com",
+                    storageBucket: "fir-test-15633.appspot.com",
+                    messagingSenderId: "572281505960"
+                };
+                firebase.initializeApp(config);
+    
+    
+                database = firebase.database();
+                tests = database.ref('texturetests');
+                var timeN = new Date().valueOf(); //timestamp in seconds
+    
+    
+                var data = {
+                    name: 'pageLoad',
+                    time: timeN
+                };
+                //fruits.push(data);
+                //database.ref('fruits').push(data);
+                tests.push(data, pushFinished); //callback
+    
+                function pushFinished(error) {
+                    if (error) {
+                        console.log('Error on push to DB');
+                    } else {
+                        console.log('Test data saved to DB');
+                    }
+                }
+    
+                var ref = database.ref("texturetests");
+                ref.on("value", gotData, errData); //value triggered on changes to db
+    
+                function gotData(data) {
+                    var fruits = data.val();
+                    // Grab the keys to iterate over the object
+                    var keys = Object.keys(tests);
+    
+                    for (var i = 0; i < keys.length; i++) {
+                        var key = keys[i];
+                        // Look at each fruit object!
+                        var test = tests[key];
+                    }
+                    console.log("DB change callback- returned object: " + tests);
+                }
+    
+                //callback for specific id...
+                //            var id = '-KVKnwa-MsPXzNbNHdmK';
+                //            var ref = database.ref("fruits/" + id);
+                //            ref.on("value", gotOne, errData);
+                //
+                //            function gotOne(data) {
+                //                var fruit = data.val();
+                //            }
+                function errData() {
+                    console.log('Error on database update callback');
+                }
+    
+    
+            </script>-->
+
 
 </html>
